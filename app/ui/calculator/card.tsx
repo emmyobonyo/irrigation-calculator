@@ -60,7 +60,7 @@ export default function Card() {
           value={fieldArea}
           onChange={(e) => {
             const value = e.target.value;
-            value === "" ? setFieldArea("") : setFieldArea(Number(value));
+            setFieldArea(value === "" ? "" : Number(value));
           }}
         />
       </div>
@@ -76,9 +76,7 @@ export default function Card() {
           value={waterRequirement}
           onChange={(e) => {
             const value = e.target.value;
-            value === ""
-              ? setWaterRequirement("")
-              : setWaterRequirement(Number(value));
+            setWaterRequirement(value === "" ? "" : Number(value));
           }}
         />
       </div>
@@ -94,9 +92,7 @@ export default function Card() {
           value={irrigationEfficiency}
           onChange={(e) => {
             const value = e.target.value;
-            value === ""
-              ? setIrrigationEfficiency("")
-              : setIrrigationEfficiency(Number(value));
+            setIrrigationEfficiency(value === "" ? "" : Number(value));
           }}
         />
       </div>
@@ -112,9 +108,7 @@ export default function Card() {
           value={irrigationDaysPerWeek}
           onChange={(e) => {
             const value = e.target.value;
-            value === ""
-              ? setIrrigationDaysPerWeek("")
-              : setIrrigationDaysPerWeek(Number(value));
+            setIrrigationDaysPerWeek(value === "" ? "" : Number(value));
           }}
         />
       </div>
