@@ -1,5 +1,6 @@
 "use client";
 
+// Is our connection still working
 import { useState } from "react";
 
 export default function Card() {
