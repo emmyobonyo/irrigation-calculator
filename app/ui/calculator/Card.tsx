@@ -28,8 +28,8 @@ export default function Card() {
   };
 
   return (
-    <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
-      <h5 className="text-xl font-bold text-gray-900 dark:text-white">
+    <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-lg sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+      <h5 className="text-xl font-bold text-gray-900 dark:text-white mb-5">
         Irrigation Calculator
       </h5>
       <div>
