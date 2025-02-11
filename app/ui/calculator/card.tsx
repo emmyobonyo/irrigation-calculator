@@ -4,25 +4,40 @@
 import { useState } from "react";
 
 export default function Card() {
-  const [fieldArea, setFieldArea] = useState(0);
-  const [waterRequirement, setWaterRequirement] = useState(0);
-  const [irrigationEfficiency, setIrrigationEfficiency] = useState(0);
-  const [irrigationDaysPerWeek, setIrrigationDaysPerWeek] = useState(0);
+  const [fieldArea, setFieldArea] = useState<number | "">(0);
+  const [waterRequirement, setWaterRequirement] = useState<number | "">(0);
+  const [irrigationEfficiency, setIrrigationEfficiency] = useState<number | "">(
+    0
+  );
+  const [irrigationDaysPerWeek, setIrrigationDaysPerWeek] = useState<
+    number | ""
+  >(0);
   const [result, setResult] = useState("");
 
   const calculateWaterQuantity = () => {
     if (
-      fieldArea <= 0 ||
-      waterRequirement <= 0 ||
-      irrigationEfficiency <= 0 ||
-      irrigationDaysPerWeek <= 0
+      fieldArea == undefined ||
+      waterRequirement == undefined ||
+      irrigationEfficiency == undefined ||
+      irrigationDaysPerWeek == undefined
+    ) {
+      setResult(`It has retuned an empty value, please enter a value`);
+      return;
+    }
+
+    if (
+      Number(fieldArea) <= 0 ||
+      Number(waterRequirement) <= 0 ||
+      Number(irrigationEfficiency) <= 0 ||
+      Number(irrigationDaysPerWeek) <= 0
     ) {
       setResult(`Please Enter a value that's greater than 0`);
       return;
     }
     const waterQuantity =
-      (fieldArea * waterRequirement) / (irrigationEfficiency / 100);
-    const weeklyWaterQuantity = waterQuantity * irrigationDaysPerWeek;
+      (Number(fieldArea) * Number(waterRequirement)) /
+      (Number(irrigationEfficiency) / 100);
+    const weeklyWaterQuantity = waterQuantity * Number(irrigationDaysPerWeek);
     setResult(
       `Water Quantity Required: ${waterQuantity} L/day, Weekly Water Quantity: ${weeklyWaterQuantity} L`
     );
@@ -43,7 +58,10 @@ export default function Card() {
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-5"
           required
           value={fieldArea}
-          onChange={(e) => setFieldArea(Number(e.target.value))}
+          onChange={(e) => {
+            const value = e.target.value;
+            value === "" ? setFieldArea("") : setFieldArea(Number(value));
+          }}
         />
       </div>
       <div>
@@ -56,7 +74,12 @@ export default function Card() {
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-5"
           required
           value={waterRequirement}
-          onChange={(e) => setWaterRequirement(Number(e.target.value))}
+          onChange={(e) => {
+            const value = e.target.value;
+            value === ""
+              ? setWaterRequirement("")
+              : setWaterRequirement(Number(value));
+          }}
         />
       </div>
       <div>
@@ -69,7 +92,12 @@ export default function Card() {
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-5"
           required
           value={irrigationEfficiency}
-          onChange={(e) => setIrrigationEfficiency(Number(e.target.value))}
+          onChange={(e) => {
+            const value = e.target.value;
+            value === ""
+              ? setIrrigationEfficiency("")
+              : setIrrigationEfficiency(Number(value));
+          }}
         />
       </div>
       <div>
@@ -82,7 +110,12 @@ export default function Card() {
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-5"
           required
           value={irrigationDaysPerWeek}
-          onChange={(e) => setIrrigationDaysPerWeek(Number(e.target.value))}
+          onChange={(e) => {
+            const value = e.target.value;
+            value === ""
+              ? setIrrigationDaysPerWeek("")
+              : setIrrigationDaysPerWeek(Number(value));
+          }}
         />
       </div>
       <button
