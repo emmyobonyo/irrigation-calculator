@@ -1,7 +1,7 @@
 "use client";
 
 // Is our connection still working
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Card() {
   const [fieldArea, setFieldArea] = useState<number | "">(0);
@@ -13,6 +13,16 @@ export default function Card() {
     number | ""
   >(0);
   const [result, setResult] = useState("");
+
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return null;
+  }
 
   const calculateWaterQuantity = () => {
     if (
