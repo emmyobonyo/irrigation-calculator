@@ -4,14 +4,14 @@
 import { useState, useEffect } from "react";
 
 export default function Card() {
-  const [fieldArea, setFieldArea] = useState<number | "">(0);
-  const [waterRequirement, setWaterRequirement] = useState<number | "">(0);
-  const [irrigationEfficiency, setIrrigationEfficiency] = useState<number | "">(
-    0
-  );
-  const [irrigationDaysPerWeek, setIrrigationDaysPerWeek] = useState<
-    number | ""
-  >(0);
+  const [acres, setAcres] = useState<number | "">(0);
+  const [crop, setCrop] = useState<String>("");
+  const [row, setRow] = useState<number | "">(0);
+  const [tree, setTree] = useState<number | "">(0);
+  const [cropET, setCropET] = useState<number | "">(0);
+  const [powerCapacity, setPowerCapacity] = useState<number | "">(0);
+  // const [week, setWeek] = useState<number | "">;
+  const [month, setMonth] = useState<String>("Select a month");
   const [result, setResult] = useState("");
 
   const [isClient, setIsClient] = useState(false);
@@ -24,33 +24,53 @@ export default function Card() {
     return null;
   }
 
-  const calculateWaterQuantity = () => {
-    if (
-      fieldArea == undefined ||
-      waterRequirement == undefined ||
-      irrigationEfficiency == undefined ||
-      irrigationDaysPerWeek == undefined
-    ) {
-      setResult(`It has retuned an empty value, please enter a value`);
-      return;
-    }
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
-    if (
-      Number(fieldArea) <= 0 ||
-      Number(waterRequirement) <= 0 ||
-      Number(irrigationEfficiency) <= 0 ||
-      Number(irrigationDaysPerWeek) <= 0
-    ) {
-      setResult(`Please Enter a value that's greater than 0`);
-      return;
-    }
-    const waterQuantity =
-      (Number(fieldArea) * Number(waterRequirement)) /
-      (Number(irrigationEfficiency) / 100);
-    const weeklyWaterQuantity = waterQuantity * Number(irrigationDaysPerWeek);
-    setResult(
-      `Water Quantity Required: ${waterQuantity} L/day, Weekly Water Quantity: ${weeklyWaterQuantity} L`
-    );
+  const weeks = ["1", "2", "3", "4"];
+
+  const calculateWaterQuantity = () => {
+    console.log("Caluclating water quantity");
+    console.log(acres);
+    console.log(crop);
+    // if (
+    //   fieldArea == undefined ||
+    //   waterRequirement == undefined ||
+    //   irrigationEfficiency == undefined ||
+    //   irrigationDaysPerWeek == undefined
+    // ) {
+    //   setResult(`It has retuned an empty value, please enter a value`);
+    //   return;
+    // }
+
+    // if (
+    //   Number(acres) <= 0 ||
+    //   Number(waterRequirement) <= 0 ||
+    //   Number(irrigationEfficiency) <= 0 ||
+    //   Number(irrigationDaysPerWeek) <= 0
+    // ) {
+    //   setResult(`Please Enter a value that's greater than 0`);
+    //   return;
+    // }
+    // const waterQuantity =
+    //   (Number(acres) * Number(waterRequirement)) /
+    //   (Number(irrigationEfficiency) / 100);
+    // const weeklyWaterQuantity = waterQuantity * Number(irrigationDaysPerWeek);
+    // setResult(
+    //   `Water Quantity Required: ${waterQuantity} L/day, Weekly Water Quantity: ${weeklyWaterQuantity} L`
+    // );
   };
 
   return (
@@ -60,68 +80,144 @@ export default function Card() {
       </h5>
       <div>
         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          Field Area(ha):
+          Acres(ha):
         </label>
         <input
           type="number"
           id="email"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-5"
           required
-          value={fieldArea}
+          value={acres}
           onChange={(e) => {
             const value = e.target.value;
-            setFieldArea(value === "" ? "" : Number(value));
+            setAcres(value === "" ? "" : Number(value));
           }}
         />
       </div>
       <div>
         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          Water Requirement (mm/day):
+          Crop:
+        </label>
+        <select
+          id="crop"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-5"
+          required
+          onChange={(e) => {
+            const value = e.target.value;
+            setCrop(value);
+          }}
+        >
+          <option value="">Select a crop</option>
+          <option value="crop1">Almond</option>
+          <option value="crop2">Pistachio</option>
+          <option value="crop3">Citrus</option>
+        </select>
+      </div>
+      <div className="mb-5">
+        <h3 className="font-bold">Spacing</h3>
+        <div className="flex items center justify-between">
+          <div className="w-4.5/10">
+            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              Row (ft):
+            </label>
+            <input
+              type="number"
+              id="password"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white "
+              required
+              value={row}
+              onChange={(e) => {
+                const value = e.target.value;
+                setRow(value === "" ? "" : Number(value));
+              }}
+            />
+          </div>
+          <div className="w-4.5/10">
+            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              Tree (ft):
+            </label>
+            <input
+              type="number"
+              id="password"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white "
+              required
+              value={tree}
+              onChange={(e) => {
+                setTree(e.target.value === "" ? "" : Number(e.target.value));
+              }}
+            />
+          </div>
+        </div>
+      </div>
+      <div>
+        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          Month:
+        </label>
+        <select
+          id="crop"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-5"
+          required
+          onChange={(e) => {
+            const value = e.target.value;
+            setMonth(value);
+          }}
+        >
+          {months.map((month) => (
+            <option value={month}>{month}</option>
+          ))}
+        </select>
+      </div>
+      <div>
+        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          Week:
+        </label>
+        <select
+          id="crop"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-5"
+          required
+          onChange={(e) => {
+            const value = e.target.value;
+            setMonth(value);
+          }}
+        >
+          {weeks.map((week) => (
+            <option value={week}>{week}</option>
+          ))}
+        </select>
+      </div>
+      <div>
+        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          Crop ET:
         </label>
         <input
           type="number"
-          id="password"
+          id="email"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-5"
           required
-          value={waterRequirement}
+          value={cropET}
           onChange={(e) => {
             const value = e.target.value;
-            setWaterRequirement(value === "" ? "" : Number(value));
+            setCropET(value === "" ? "" : Number(value));
           }}
         />
       </div>
       <div>
         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          Irrigation Efficiency (%):
+          Power Capacity:
         </label>
         <input
           type="number"
-          id="password"
+          id="email"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-5"
           required
-          value={irrigationEfficiency}
+          value={powerCapacity}
           onChange={(e) => {
             const value = e.target.value;
-            setIrrigationEfficiency(value === "" ? "" : Number(value));
+            setPowerCapacity(value === "" ? "" : Number(value));
           }}
         />
       </div>
-      <div>
-        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          Irrigation Days per Week:
-        </label>
-        <input
-          type="number"
-          id="password"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-5"
-          required
-          value={irrigationDaysPerWeek}
-          onChange={(e) => {
-            const value = e.target.value;
-            setIrrigationDaysPerWeek(value === "" ? "" : Number(value));
-          }}
-        />
-      </div>
+
       <button
         className="w-full text-white bg-black hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         onClick={calculateWaterQuantity}
