@@ -3,17 +3,19 @@ type Content = {
   content: string;
 };
 
+export type ExtractedData = {
+  __EMPTY: string;
+  k2: number;
+  ET2: number;
+};
+
 interface IterationProps {
   name: string;
   contents: Content[];
   setContent: (value: string) => void;
 }
 
-export default function Iteration({
-  name,
-  contents,
-  setContent,
-}: IterationProps) {
+export function Iteration({ name, contents, setContent }: IterationProps) {
   return (
     <div className="flex items-center justify-between mb-5">
       <label className="block w-3/10 mb-2 text-xl font-medium text-gray-900 dark:text-white mr-5">
@@ -36,4 +38,16 @@ export default function Iteration({
       </select>
     </div>
   );
+}
+
+export function calculateCropET(
+  extractedData: ExtractedData[],
+  month: string | undefined,
+  setCropET: (value: number) => void
+) {
+  extractedData.map((data: ExtractedData) => {
+    if (data.__EMPTY === month) {
+      setCropET(data.k2 * data.ET2);
+    }
+  });
 }
