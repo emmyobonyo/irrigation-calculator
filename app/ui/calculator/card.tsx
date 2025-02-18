@@ -51,6 +51,7 @@ export default function Card() {
     console.log(acres);
     console.log(crop);
     console.log(month);
+    console.log(week);
   };
 
   const handleSetMonth = (month: string) => {
