@@ -53,18 +53,18 @@ export default function Card() {
   };
 
   return (
-    <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-lg sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+    <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-lg sm:p-6 md:p-4 dark:bg-gray-800 dark:border-gray-700">
       <h5 className="text-xl font-bold text-gray-900 dark:text-white mb-5">
         Irrigation Calculator
       </h5>
-      <div>
-        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+      <div className="flex items-center justify-between mb-5">
+        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-xl">
           Acres(ha):
         </label>
         <input
           type="number"
           id="email"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-5"
+          className="w-1/2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
           required
           value={acres}
           onChange={(e) => {
@@ -72,14 +72,17 @@ export default function Card() {
             setAcres(value === "" ? "" : Number(value));
           }}
         />
+        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-xl">
+          Ac:
+        </label>
       </div>
-      <div>
-        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+      <div className="flex items-center justify-between mb-5">
+        <label className="w-3/10 block mb-2 text-sm font-medium text-gray-900 dark:text-white text-xl mr-5">
           Crop:
         </label>
         <select
           id="crop"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-5"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white w-full"
           required
           onChange={(e) => {
             const value = e.target.value;
@@ -93,16 +96,16 @@ export default function Card() {
         </select>
       </div>
       <div className="mb-5">
-        <h3 className="font-bold">Spacing</h3>
-        <div className="flex items center justify-between">
-          <div className="w-4.5/10">
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+        <h3 className="font-bold text-lg">Spacing</h3>
+        <div className="flex flex-col justify-center items-center">
+          <div className="w-8/10 flex items-center justify-between">
+            <label className="block mb-2 text-lg font-medium text-gray-900 dark:text-white md: text-lg">
               Row (ft):
             </label>
             <input
               type="number"
               id="row"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white "
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white w-7/10"
               required
               value={row}
               onChange={(e) => {
@@ -111,14 +114,14 @@ export default function Card() {
               }}
             />
           </div>
-          <div className="w-4.5/10">
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          <div className="w-8/10 flex items-center justify-between mt-3">
+            <label className="block mb-2 text-lg font-medium text-gray-900 dark:text-white">
               Tree (ft):
             </label>
             <input
               type="number"
               id="tree"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white "
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white w-7/10"
               required
               value={tree}
               onChange={(e) => {
@@ -128,13 +131,13 @@ export default function Card() {
           </div>
         </div>
       </div>
-      <div>
-        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+      <div className="flex items-center justify-between mb-5">
+        <label className="block w-3/10 mb-2 text-xl font-medium text-gray-900 dark:text-white mr-5">
           Month:
         </label>
         <select
           id="week"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-5"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white w-full"
           required
           onChange={(e) => {
             const value = e.target.value;
@@ -148,13 +151,13 @@ export default function Card() {
           ))}
         </select>
       </div>
-      <div>
-        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+      <div className="flex items-center justify-between mb-5">
+        <label className="w-3/10 block mb-2 text-xl font-medium text-gray-900 dark:text-white mr-5">
           Week:
         </label>
         <select
           id="week"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-5"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white w-full"
           required
           onChange={(e) => {
             const value = e.target.value;
@@ -168,14 +171,14 @@ export default function Card() {
           ))}
         </select>
       </div>
-      <div>
-        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+      <div className="flex items-center justify-between">
+        <label className="block mb-2 text-lg font-medium text-gray-900 dark:text-white w-3/10 mr-5">
           Crop ET:
         </label>
         <input
           type="number"
           id="crop-et"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-5"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
           required
           value={cropET}
           onChange={(e) => {
@@ -184,14 +187,14 @@ export default function Card() {
           }}
         />
       </div>
-      <div>
-        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+      <div className="flex items-center justify-between my-5">
+        <label className="block w-3/10 mb-2 text-lg font-medium text-gray-900 dark:text-white mr-3">
           Power Capacity:
         </label>
         <input
           type="number"
           id="power-capacity"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-5"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white w-full"
           required
           value={powerCapacity}
           onChange={(e) => {
