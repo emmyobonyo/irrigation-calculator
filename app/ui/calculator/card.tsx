@@ -5,14 +5,13 @@ import { useState, useEffect } from "react";
 
 export default function Card() {
   const [acres, setAcres] = useState<number | "">(0);
-  const [crop, setCrop] = useState<String>("");
+  const [crop, setCrop] = useState<string>("");
   const [row, setRow] = useState<number | "">(0);
   const [tree, setTree] = useState<number | "">(0);
   const [cropET, setCropET] = useState<number | "">(0);
   const [powerCapacity, setPowerCapacity] = useState<number | "">(0);
-  // const [week, setWeek] = useState<number | "">;
-  const [month, setMonth] = useState<String>("Select a month");
-  const [result, setResult] = useState("");
+  const [week, setWeek] = useState<number>();
+  const [month, setMonth] = useState<string>();
 
   const [isClient, setIsClient] = useState(false);
 
@@ -25,52 +24,32 @@ export default function Card() {
   }
 
   const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    { id: 1, month: "January" },
+    { id: 2, month: "February" },
+    { id: 3, month: "March" },
+    { id: 4, month: "April" },
+    { id: 5, month: "May" },
+    { id: 6, month: "June" },
+    { id: 7, month: "July" },
+    { id: 8, month: "August" },
+    { id: 9, month: "September" },
+    { id: 10, month: "October" },
+    { id: 11, month: "November" },
+    { id: 12, month: "December" },
   ];
 
-  const weeks = ["1", "2", "3", "4"];
+  const weeks = [
+    { id: 1, week: 1 },
+    { id: 2, week: 2 },
+    { id: 3, week: 3 },
+    { id: 4, week: 4 },
+  ];
 
   const calculateWaterQuantity = () => {
     console.log("Caluclating water quantity");
     console.log(acres);
     console.log(crop);
-    // if (
-    //   fieldArea == undefined ||
-    //   waterRequirement == undefined ||
-    //   irrigationEfficiency == undefined ||
-    //   irrigationDaysPerWeek == undefined
-    // ) {
-    //   setResult(`It has retuned an empty value, please enter a value`);
-    //   return;
-    // }
-
-    // if (
-    //   Number(acres) <= 0 ||
-    //   Number(waterRequirement) <= 0 ||
-    //   Number(irrigationEfficiency) <= 0 ||
-    //   Number(irrigationDaysPerWeek) <= 0
-    // ) {
-    //   setResult(`Please Enter a value that's greater than 0`);
-    //   return;
-    // }
-    // const waterQuantity =
-    //   (Number(acres) * Number(waterRequirement)) /
-    //   (Number(irrigationEfficiency) / 100);
-    // const weeklyWaterQuantity = waterQuantity * Number(irrigationDaysPerWeek);
-    // setResult(
-    //   `Water Quantity Required: ${waterQuantity} L/day, Weekly Water Quantity: ${weeklyWaterQuantity} L`
-    // );
+    console.log(month);
   };
 
   return (
@@ -122,7 +101,7 @@ export default function Card() {
             </label>
             <input
               type="number"
-              id="password"
+              id="row"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white "
               required
               value={row}
@@ -138,7 +117,7 @@ export default function Card() {
             </label>
             <input
               type="number"
-              id="password"
+              id="tree"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white "
               required
               value={tree}
@@ -154,7 +133,7 @@ export default function Card() {
           Month:
         </label>
         <select
-          id="crop"
+          id="week"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-5"
           required
           onChange={(e) => {
@@ -163,7 +142,9 @@ export default function Card() {
           }}
         >
           {months.map((month) => (
-            <option value={month}>{month}</option>
+            <option key={month.id} value={month.month}>
+              {month.month}
+            </option>
           ))}
         </select>
       </div>
@@ -172,16 +153,18 @@ export default function Card() {
           Week:
         </label>
         <select
-          id="crop"
+          id="week"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-5"
           required
           onChange={(e) => {
             const value = e.target.value;
-            setMonth(value);
+            setWeek(Number(value));
           }}
         >
           {weeks.map((week) => (
-            <option value={week}>{week}</option>
+            <option key={week.id} value={week.week}>
+              {week.week}
+            </option>
           ))}
         </select>
       </div>
@@ -191,7 +174,7 @@ export default function Card() {
         </label>
         <input
           type="number"
-          id="email"
+          id="crop-et"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-5"
           required
           value={cropET}
@@ -207,7 +190,7 @@ export default function Card() {
         </label>
         <input
           type="number"
-          id="email"
+          id="power-capacity"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-5"
           required
           value={powerCapacity}
@@ -224,9 +207,6 @@ export default function Card() {
       >
         Calculate Water Quantity
       </button>
-      {result !== "" && (
-        <p className="mt-5 text-gray-900 dark:text-white">{result}</p>
-      )}
     </div>
   );
 }
