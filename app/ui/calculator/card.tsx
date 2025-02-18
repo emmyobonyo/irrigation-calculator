@@ -2,6 +2,7 @@
 
 // Is our connection still working
 import { useState, useEffect } from "react";
+import Iteration from "@/app/lib/utils";
 
 export default function Card() {
   const [acres, setAcres] = useState<number | "">(0);
@@ -24,25 +25,25 @@ export default function Card() {
   }
 
   const months = [
-    { id: 1, month: "January" },
-    { id: 2, month: "February" },
-    { id: 3, month: "March" },
-    { id: 4, month: "April" },
-    { id: 5, month: "May" },
-    { id: 6, month: "June" },
-    { id: 7, month: "July" },
-    { id: 8, month: "August" },
-    { id: 9, month: "September" },
-    { id: 10, month: "October" },
-    { id: 11, month: "November" },
-    { id: 12, month: "December" },
+    { id: 1, content: "January" },
+    { id: 2, content: "February" },
+    { id: 3, content: "March" },
+    { id: 4, content: "April" },
+    { id: 5, content: "May" },
+    { id: 6, content: "June" },
+    { id: 7, content: "July" },
+    { id: 8, content: "August" },
+    { id: 9, content: "September" },
+    { id: 10, content: "October" },
+    { id: 11, content: "November" },
+    { id: 12, content: "December" },
   ];
 
   const weeks = [
-    { id: 1, week: 1 },
-    { id: 2, week: 2 },
-    { id: 3, week: 3 },
-    { id: 4, week: 4 },
+    { id: 1, content: "1" },
+    { id: 2, content: "2" },
+    { id: 3, content: "3" },
+    { id: 4, content: "4" },
   ];
 
   const calculateWaterQuantity = () => {
@@ -50,6 +51,14 @@ export default function Card() {
     console.log(acres);
     console.log(crop);
     console.log(month);
+  };
+
+  const handleSetMonth = (month: string) => {
+    setMonth(month);
+  };
+
+  const handleSetWeek = (week: string) => {
+    setWeek(Number(week));
   };
 
   return (
@@ -131,46 +140,8 @@ export default function Card() {
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-between mb-5">
-        <label className="block w-3/10 mb-2 text-xl font-medium text-gray-900 dark:text-white mr-5">
-          Month:
-        </label>
-        <select
-          id="week"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white w-full"
-          required
-          onChange={(e) => {
-            const value = e.target.value;
-            setMonth(value);
-          }}
-        >
-          {months.map((month) => (
-            <option key={month.id} value={month.month}>
-              {month.month}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div className="flex items-center justify-between mb-5">
-        <label className="w-3/10 block mb-2 text-xl font-medium text-gray-900 dark:text-white mr-5">
-          Week:
-        </label>
-        <select
-          id="week"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white w-full"
-          required
-          onChange={(e) => {
-            const value = e.target.value;
-            setWeek(Number(value));
-          }}
-        >
-          {weeks.map((week) => (
-            <option key={week.id} value={week.week}>
-              {week.week}
-            </option>
-          ))}
-        </select>
-      </div>
+      <Iteration name={"Month"} contents={months} setContent={handleSetMonth} />
+      <Iteration name={"Week"} contents={weeks} setContent={handleSetWeek} />
       <div className="flex items-center justify-between">
         <label className="block mb-2 text-lg font-medium text-gray-900 dark:text-white w-3/10 mr-5">
           Crop ET:
